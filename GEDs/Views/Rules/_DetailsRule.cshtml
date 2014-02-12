@@ -1,0 +1,74 @@
+﻿@model Entities.Models.RuleBase
+
+<fieldset>
+    <legend>Rule</legend>
+
+    <table>
+        <tr>
+            <th><span title="Order Index Position">*Pos</span></th>
+            <th>Name</th>
+        </tr>
+        <tr>
+            <td>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.Order)
+                </div>
+            </td>
+            <td>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.Name)
+                </div>
+            </td>
+        </tr>
+    </table>
+
+    <h3>Condition</h3>
+    <table style="width:650px; padding-left:20px; border-collapse: separate; border:1px dashed lightgrey;">
+        <tr>
+            <th><span title="Lookup column to apply condition against.">*Column</span></th>
+            <th><span title="String to apply condition against. (REGEX)">*Condition</span></th>
+        </tr>
+        <tr>
+            <td>
+                <div class="display-field">
+                    @Html.Display(ViewBag.LookupColumnName as string)
+                </div>
+            </td>
+            <td>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.RegularExpression)
+                </div>
+            </td>
+        </tr>
+    </table>
+
+    <h3>Action</h3>
+
+    <table id="TableAction" style="width:650px; padding-left:20px; border-collapse: separate; border: 1px dashed lightgrey;">
+        <tr>
+            <th><span title="Action column to apply result against.">*Column</span></th>
+        </tr>
+        <tr>
+            <td>
+                <div class="display-field">
+                    @Html.Display(ViewBag.ActionColumnName as string)
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.ReplaceValue)
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.ReplaceColumn)
+                </div>
+            </td>
+        </tr>
+    </table>
+
+</fieldset>

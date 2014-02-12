@@ -1,0 +1,9 @@
+﻿@model Entities.Models.Component
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete: @Model.Field</h2>
+
+@Html.Partial("~/Views/Field/_DeleteField.cshtml", Model)

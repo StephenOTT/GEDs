@@ -1,0 +1,141 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A8F1B976-EC25-40FF-AFFD-91C7E348E001}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Data</RootNamespace>
+    <AssemblyName>Data</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Elmah">
+      <HintPath>..\packages\elmah.corelibrary.1.2.2\lib\Elmah.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DbContextExtension.cs" />
+    <Compile Include="GedsContext.cs" />
+    <Compile Include="IDbContext.cs" />
+    <Compile Include="Mappings\ComponentMap.cs" />
+    <Compile Include="Mappings\ComponentOrderPriorityMap.cs" />
+    <Compile Include="Mappings\ComponentRuleMap.cs" />
+    <Compile Include="Mappings\JobMap.cs" />
+    <Compile Include="Mappings\LogMap.cs" />
+    <Compile Include="Mappings\RuleActionMap.cs" />
+    <Compile Include="Mappings\StructureMap.cs" />
+    <None Include="Mappings\ContentFieldMappingMap.cs" />
+    <Compile Include="Mappings\SettingMap.cs" />
+    <Compile Include="Mappings\StructureOrderPriorityMap.cs" />
+    <Compile Include="Mappings\StructureRuleMap.cs" />
+    <Compile Include="Migrations\201311040156507_InitialBuild.cs" />
+    <Compile Include="Migrations\201311040156507_InitialBuild.Designer.cs">
+      <DependentUpon>201311040156507_InitialBuild.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201311060155378_AddNameToRule.cs" />
+    <Compile Include="Migrations\201311060155378_AddNameToRule.Designer.cs">
+      <DependentUpon>201311060155378_AddNameToRule.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201311060157196_AddNameToRule1.cs" />
+    <Compile Include="Migrations\201311060157196_AddNameToRule1.Designer.cs">
+      <DependentUpon>201311060157196_AddNameToRule1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201311071935233_AddDateSentOnNullableForJobs.cs" />
+    <Compile Include="Migrations\201311071935233_AddDateSentOnNullableForJobs.Designer.cs">
+      <DependentUpon>201311071935233_AddDateSentOnNullableForJobs.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201311080311342_AddLogging.cs" />
+    <Compile Include="Migrations\201311080311342_AddLogging.Designer.cs">
+      <DependentUpon>201311080311342_AddLogging.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201311141350291_NewChanges.cs" />
+    <Compile Include="Migrations\201311141350291_NewChanges.Designer.cs">
+      <DependentUpon>201311141350291_NewChanges.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Entities\Entities.csproj">
+      <Project>{0b71d092-e90c-46c6-aeb5-8c6c698227d8}</Project>
+      <Name>Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Plugin\Plugin.csproj">
+      <Project>{5f906961-0224-4a68-be2c-9fef0d9ad6b4}</Project>
+      <Name>Plugin</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201311040156507_InitialBuild.resx">
+      <DependentUpon>201311040156507_InitialBuild.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201311060155378_AddNameToRule.resx">
+      <DependentUpon>201311060155378_AddNameToRule.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201311060157196_AddNameToRule1.resx">
+      <DependentUpon>201311060157196_AddNameToRule1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201311071935233_AddDateSentOnNullableForJobs.resx">
+      <DependentUpon>201311071935233_AddDateSentOnNullableForJobs.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201311080311342_AddLogging.resx">
+      <DependentUpon>201311080311342_AddLogging.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201311141350291_NewChanges.resx">
+      <DependentUpon>201311141350291_NewChanges.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,89 @@
+﻿td {
+    vertical-align: top;
+}
+
+table.hover tr:hover td:not(th) {
+    background-color: #E5E5E5;
+}
+
+table.hover tr:hover td {
+    background-color: transparent;
+}
+
+table.selection tr.rowSelected {
+    background-color: #E5E5E5;
+}
+
+table.selection tr.rowSelected td {
+    background-color: transparent;
+}
+
+table.overflow {
+    table-layout:fixed;
+    width: 100%;
+}
+
+td.overflow_hidden {
+    overflow:hidden;
+    white-space:nowrap;
+}
+
+td.overflow_break {
+    word-wrap: break-word;
+}
+
+td.align_right {
+    text-align: right;
+}
+
+td.align_center {
+    text-align: center;
+}
+
+th.align_center {
+    text-align: center;
+}
+
+/* Layouts */
+
+h2 {
+    margin-bottom: 10px;
+}
+
+div.display-field {
+    border-style: dashed;
+    border-width: 1px;
+    border-color: lightgrey;
+    padding: 2px;
+    padding-left: 4px;
+    padding-right: 4px;
+    margin-bottom: 10px;
+    min-height: 16px;
+}
+
+/* Input Elements */
+
+.large input {
+    width: 100%;
+}
+
+.large textarea {
+    width: 100%;
+}
+
+select.edit_selector {
+    padding: 5px;
+    margin: 6px 0 5px 0;
+    border: 1px solid #e2e2e2;
+}
+
+    select.edit_selector:focus {
+        border: 1px solid #7ac0da;
+    }
+
+
+/* Colours */
+
+.lightYellow {
+    background-color:#FFFAAA;
+}

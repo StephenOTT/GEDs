@@ -1,0 +1,91 @@
+﻿@model GEDs.ViewModel.HomeViewModel
+
+@{
+    ViewBag.Title = "Jobs";
+}
+
+<p style="width:100%; text-align:right">
+    Service Status: 
+    @if(Model.ServiceStatus) {
+        @Html.Raw("<span style='color:green;'>On</span>")
+        if(User.IsInRole(System.Web.Configuration.WebConfigurationManager.AppSettings["AdminDomainGroup"])) {
+            @Html.ActionLink("[Stop]", "Service", new { status = false }, new { style = "font-size:10px;text-decoration:none;color:blue;", Title="Stop the GEDS service." })
+        }
+    } else {
+        @Html.Raw("<span style='color:red;'>Off</span>") 
+        if(User.IsInRole(System.Web.Configuration.WebConfigurationManager.AppSettings["AdminDomainGroup"])) {
+            @Html.ActionLink("[Start]", "Service", new { status = true }, new { style = "font-size:10px;text-decoration:none;color:blue;", Title="Start the GEDS service." })
+        }
+    }
+</p>
+
+<h2>Jobs</h2>
+
+<table class="selection hover overflow">
+    <tr>
+        <th>
+            Status
+        </th>
+        <th>
+            Started
+        </th>
+        <th>
+            Finished
+        </th>
+        @if(User.IsInRole(System.Web.Configuration.WebConfigurationManager.AppSettings["AdminDomainGroup"])) {
+        <th>
+            Files
+        </th>
+        }
+        <th>
+            Sent On
+        </th>
+        <th>
+            Sent To
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model.Jobs) {
+    <tr>
+        <td>
+            @if(item.Status) {
+                if(User.IsInRole(System.Web.Configuration.WebConfigurationManager.AppSettings["AdminDomainGroup"])) {
+                    @Html.ActionLink("Success", "Index", "Log", new { Guid = item.Guid }, null)
+                } else {
+                    @("Success")
+                }
+            } else {
+                if(User.IsInRole(System.Web.Configuration.WebConfigurationManager.AppSettings["AdminDomainGroup"])) {
+                    @Html.ActionLink("Failed", "Index", "Log", new { Guid = item.Guid }, null)
+                } else {
+                    @("Failed")
+                }
+            }
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.JobStarted)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.JobCompleted)
+        </td>
+        @if(User.IsInRole(System.Web.Configuration.WebConfigurationManager.AppSettings["AdminDomainGroup"])) {
+        <td>
+            @Html.ActionLink("Structure", "Download", new { id = item.Id, type = "ce1" })
+            <br />
+            @Html.ActionLink("Component", "Download", new { id = item.Id, type = "ce2" })
+        </td>
+        }
+        <td>
+            @Html.DisplayFor(modelItem => item.DataSentOn)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SentTo)
+        </td>
+        <td>
+            @Html.ActionLink("Demo", "Demo", new { guid = item.Guid })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,105 @@
+﻿@model GEDs.ViewModel.LogViewModel
+
+@using GEDs.Helpers
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@section Javascript {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#SeverityFilter').change(function (e) {
+                window.location.replace("/Log?@Model.ParameterUrl(new string[] { "Severity", "Page" })&Severity=" + $(this).val() + "&Page=1");
+            });
+
+            $('#TypeFilter').change(function (e) {
+                window.location.replace("/Log?@Model.ParameterUrl(new string[] { "Type", "Page" })&Type=" + $(this).val() + "&Page=1");
+            });
+        });
+    </script>
+}
+
+<h2>Log@(string.IsNullOrEmpty(Model.Guid) ? ("s") : (": ") + Model.Guid)</h2>
+
+<table style="width:100%">
+    <tr>
+        <td class="align_right" colspan="6">
+            Severity @Html.DropDownList("SeverityFilter", Model.Severities as IEnumerable<SelectListItem>, "All") | 
+            Type @Html.DropDownList("TypeFilter", Model.Types as IEnumerable<SelectListItem>, "All") | 
+            @Html.ActionLink("Clear", "Index")
+        </td>
+    </tr>
+</table>
+
+<table  class="selection hover">
+    <tr>
+        @if(string.IsNullOrEmpty(Model.Guid)) {
+        <th>
+            Guid
+        </th>
+        }        
+        <th style="width:14%">
+            Added
+        </th>        
+        <th>
+            <span title="Severity">S</span>
+        </th>
+        <th>
+            <span title="Type">T</span>
+        </th>
+        <th style="width:60%">
+            Details
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model.Logs) {
+    <tr>
+        @if(string.IsNullOrEmpty(Model.Guid)) {
+        <td>
+            @Html.ActionLink(item.JobGuid.Elipse(15, "..."), "Index", new { Guid = item.JobGuid })
+        </td>
+        }
+        <td>
+            @item.Added.ToString("yyyy-MM-dd")
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Severity)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Type)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Message)
+        </td>
+        <td>
+            @Html.ActionLink("Details", "Details", new { id = item.Id })
+        </td>
+    </tr>
+}
+    <tr style="height:10px;"></tr>
+ </table>
+
+<table style="width:100%">
+    <tr>
+        <td class="align_right">
+            @if(Model.Page > 2) {
+                @Html.ActionLink("First", "Index", new {Guid = Model.Guid, Severity = Model.Severity, Type = Model.Type, Page = 1 })
+            }
+            @if(Model.Page > 1) {
+                @Html.ActionLink("Prev", "Index", new {Guid = Model.Guid, Severity = Model.Severity, Type = Model.Type, Page = Model.Page - 1 })
+            }
+
+            @Model.Page / @Math.Ceiling((double)Model.LogCount / (double)Model.DisplayCount)
+
+            @if (Model.Page < Math.Ceiling((double)Model.LogCount / (double)Model.DisplayCount))
+            {
+                @Html.ActionLink("Next", "Index", new {Guid = Model.Guid, Severity = Model.Severity, Type = Model.Type, Page = Model.Page + 1 })
+            }
+            @if(Model.Page + 1 < Math.Ceiling((double)Model.LogCount / (double)Model.DisplayCount) ) {
+                @Html.ActionLink("Last", "Index", new {Guid = Model.Guid, Severity = Model.Severity, Type = Model.Type, Page = Math.Ceiling((double)Model.LogCount / (double)Model.DisplayCount) })
+            }            
+        </td>
+    </tr>
+</table>

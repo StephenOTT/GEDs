@@ -1,0 +1,12 @@
+﻿@model GEDs.ViewModel.SortingViewModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Sort Order Priority</h2>
+
+<p>
+ @Html.ActionLink("Structure Sort Order", "Index", "StructureSortOrder") | 
+ @Html.ActionLink("Component Sort Order", "Index", "ComponentSortOrder")
+</p>

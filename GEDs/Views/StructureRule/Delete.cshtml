@@ -1,0 +1,9 @@
+﻿@model Entities.Models.StructureRule
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete: @Model.Name</h2>
+
+@Html.Partial("~/Views/Rules/_DeleteRule.cshtml", Model)

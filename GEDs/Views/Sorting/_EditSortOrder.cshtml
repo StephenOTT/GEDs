@@ -1,0 +1,35 @@
+﻿@model Entities.Models.OrderPriority
+
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Order Priority</legend>
+
+        @Html.HiddenFor(model => model.Id)
+
+        <table>
+            <tr>
+                <th><span title="Order Position Index">*Pos</span></th>
+                <th>Value</th>
+            </tr>
+            <tr>
+                <td>@Html.DropDownList("Order", ViewBag.OrderIndexList as IEnumerable<SelectListItem>, new { @class = "edit_selector" })</td>
+                <td>@Html.EditorFor(model => model.Value)</td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    @Html.ValidationMessageFor(model => model.Order)
+                    @Html.ValidationMessageFor(model => model.Value)
+                </td>
+            </tr>
+        </table>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+

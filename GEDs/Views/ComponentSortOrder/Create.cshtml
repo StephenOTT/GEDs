@@ -1,0 +1,17 @@
+﻿@model Entities.Models.ComponentOrderPriority
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create Component Priority Entity</h2>
+
+@Html.Partial("~/Views/Sorting/_CreateSortOrder.cshtml", Model)
+
+<div>
+    @Html.ActionLink("Back to Sort List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

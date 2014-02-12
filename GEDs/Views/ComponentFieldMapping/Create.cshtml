@@ -1,0 +1,17 @@
+﻿@model Entities.Models.Component
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create Component Field</h2>
+
+@Html.Partial("~/Views/Field/_CreateField.cshtml", Model)
+
+<div>
+    @Html.ActionLink("Back to Field List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

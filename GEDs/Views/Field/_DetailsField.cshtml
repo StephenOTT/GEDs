@@ -1,0 +1,70 @@
+﻿@model Entities.Models.ContentFieldTable
+
+<fieldset>
+    <legend>Field</legend>
+
+    <table style="width:100%;">
+        <tr>
+            <th>
+                <span title="Field Order Position">*Pos</span>
+            </th>
+            <th>
+                Field
+            </th>
+            <th>
+                Method
+            </th>
+            <th>
+                Source
+            </th>
+        </tr>
+        <tr>
+            <td>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.Order)
+                </div>
+            </td>
+            <td>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.Field)
+                </div>
+            </td>
+            <td>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.ContentFieldMapping.Value)
+                </div>
+            </td>
+            <td>                
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.Source)
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <th></th>
+            <th>Default</th>
+            <th><span title="Max Length of Field data.">*Length</span></th>
+            <th>Validation</th>
+        </tr>
+        <tr>
+            <td></td>
+            <td><div class="display-field">
+                @Html.DisplayFor(model => model.Default)
+            </div></td>
+            <td><div class="display-field">
+                @Html.DisplayFor(model => model.MaxLength)
+            </div></td>
+            <td><div class="display-field">
+                @Html.DisplayFor(model => model.Validation)
+            </div></td>
+        </tr>
+        <tr>
+            <td colspan="4" class="align_right"><label for="Skip">@Html.DisplayFor(model => model.Skip) Skip</label></td>
+        </tr>
+        <tr>
+            <td colspan="4" class="align_right"><label for="Mandatory">@Html.DisplayFor(model => model.Mandatory) Mandatory</label></td>
+        </tr>
+    </table>
+
+    
+</fieldset>

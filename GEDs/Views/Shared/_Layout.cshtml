@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>@ViewBag.Title - GEDs</title>
+        <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+        <meta name="viewport" content="width=device-width" />
+        @Styles.Render("~/Content/css")
+        @Scripts.Render("~/bundles/modernizr")
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/FH.Geds.Global")
+
+        @RenderSection("Javascript", required: false)
+    </head>
+    <body>
+        <header>
+            <div class="content-wrapper">
+                <div class="float-left">
+                    <p class="site-title">@Html.ActionLink("FH GEDs", "Index", "Home")</p>
+                </div>
+                <div class="float-right">
+                    <section id="login">
+                        <span class="username">@User.Identity.Name</span>
+                    </section>
+                    <nav>
+                        <ul id="menu">
+                            <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                            <li>@Html.ActionLink("Field Mapping", "Index", "Field")</li>
+                            <li>@Html.ActionLink("Sorting", "Index", "Sorting")</li>
+                            <li>@Html.ActionLink("Rules", "Index", "Rules")</li>
+                            @if (User.IsInRole(System.Web.Configuration.WebConfigurationManager.AppSettings["AdminDomainGroup"])) {
+                                <li>@Html.ActionLink("Logs", "Index", "Log")</li>
+                                <li>@Html.ActionLink("Settings", "Index", "Settings")</li>
+                            }
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </header>
+        <div id="body">
+            @RenderSection("featured", required: false)
+            <section class="content-wrapper main-content clear-fix">
+                @RenderBody()
+            </section>
+        </div>
+        <footer>
+            <div class="content-wrapper">
+                <div class="float-left">
+                    <p>&copy; @DateTime.Now.Year - Flying Hippo</p>
+                </div>
+            </div>
+        </footer>
+
+        @Scripts.Render("~/bundles/jquery")
+        @RenderSection("scripts", required: false)
+    </body>
+</html>

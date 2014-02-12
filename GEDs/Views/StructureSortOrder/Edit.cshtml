@@ -1,0 +1,17 @@
+﻿@model Entities.Models.StructureOrderPriority
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit: @Model.Value</h2>
+
+@Html.Partial("~/Views/Sorting/_EditSortOrder.cshtml", Model)
+
+<div>
+    @Html.ActionLink("Back to Sort List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

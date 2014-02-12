@@ -1,0 +1,78 @@
+﻿@model Entities.Models.ContentFieldTable
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Field</legend>
+
+        <table>
+            <tr>
+                <th>
+                    <span title="Field Order Position">*Pos</span>
+                </th>
+                <th>
+                    Field
+                </th>
+                <th>
+                    Method
+                </th>
+                <th>
+                    Source
+                </th>
+            </tr>
+            <tr>
+                <td>
+                    @Html.DropDownListFor(model => model.Order, ViewBag.OrderIndex as IEnumerable<SelectListItem>, new { @class = "edit_selector" })
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.Field)
+                </td>
+                <td>
+                    @Html.DropDownListFor(model => model.ContentFieldMappingId, ViewBag.FieldType as IEnumerable<SelectListItem>, new { @class = "edit_selector" })
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.Source)
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4">
+                    @Html.ValidationMessageFor(model => model.Order)
+                    @Html.ValidationMessageFor(model => model.Field)
+                    @Html.ValidationMessageFor(model => model.ContentFieldMappingId)
+                    @Html.ValidationMessageFor(model => model.Source)
+                </td>
+            </tr>
+            <tr>
+                <th></th>
+                <th>Default</th>
+                <th><span title="Max Length of Field data.">*Length</span></th>
+                <th>Validation</th>
+            </tr>
+            <tr>
+                <td></td>
+                <td>@Html.EditorFor(model => model.Default)</td>
+                <td>@Html.DropDownListFor(model => model.MaxLength, ViewBag.MaxLength as IEnumerable<SelectListItem>, new { @class = "edit_selector" })</td>
+                <td>@Html.EditorFor(model => model.Validation)</td>
+            </tr>
+            <tr>
+                <td colspan="4">
+                    @Html.ValidationMessageFor(model => model.Default)
+                    @Html.ValidationMessageFor(model => model.Validation)
+                    @Html.ValidationMessageFor(model => model.MaxLength)
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4" class="align_right"><label for="Skip">@Html.EditorFor(model => model.Skip) Skip</label></td>
+            </tr>
+            <tr>
+                <td colspan="4" class="align_right"><label for="Mandatory">@Html.EditorFor(model => model.Mandatory) Mandatory</label></td>
+            </tr>
+        </table>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}

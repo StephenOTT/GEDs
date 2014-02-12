@@ -1,0 +1,96 @@
+﻿@model GEDs.ViewModel.DemoViewModel
+
+@{
+    ViewBag.Title = "Demo";
+}
+
+<h2></h2>
+
+@if (Model.User != null)
+{
+    <!-- Employee Info -->
+    <div id="EmployeeContainer">
+        <h1 style="border-bottom:1px solid #333333; font-size:1em; margin-bottom:10px !important;" id="EmployeeName" >
+            @Model.User.Name
+        </h1>
+        <p id="EmployeeInfo" style="margin-top: 10px; margin-bottom: 10px;" >
+            @Model.User.Title <br />
+            @Model.Parents[Model.Parents.Count-1].Name <br />
+            @Model.Organization.Name
+        </p>
+        <p id="EmployeeAddress" style="margin-top: 10px; margin-bottom: 10px;" >
+            @Model.User.Address <br />
+            @string.Format("{0}, {1} {2}", Model.User.City, Model.User.Province, Model.User.PostalCode) <br />
+            @Model.User.Country
+        </p>
+        <p id="EmployeeTelephone" style="margin-top: 10px; margin-bottom: 10px;" >
+            Telephone : @Model.User.Phone
+        </p>
+        <!-- add more tags here if needed -->
+
+        <div style="padding-top: 20px; padding-bottom:5px;">
+            <ul id="EmployeeMoveToList"  style="margin: 1em; padding: 2em; border-top-style: solid; border-width: 1px;">
+                @for(int x=Model.Parents.Count-1; x>=0; x--)
+                {
+                    <li>
+                        @Html.ActionLink(Model.Parents[x].Name,
+                                     "Demo",
+                                     new { guid = Model.Guid, ou = Model.Parents[x].GUID })
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+}
+else
+{
+    <div id="MoveToContainer">
+        <h2>Move upwards to</h2>
+        <ul id="MoveToList" style="margin: 0px 10px 8px 40px; padding: 0px">
+            @for (int x = Model.Parents.Count - 1; x >= 0; x--)
+            {
+                <li>
+                    @Html.ActionLink(Model.Parents[x].Name, "Demo", new { guid = Model.Guid, ou = Model.Parents[x].GUID })
+                </li>
+            }
+        </ul>
+    </div>
+
+    <div id="CurrentOrganizationContainer" >
+        <h2>Current Organization</h2>
+        <p style="border-top-style: solid; border-bottom-style: solid; border-width: 1px; padding: 1em;">
+            @Html.ActionLink(Model.Organization.Name, "Demo", new { guid = Model.Guid, ou=Model.Organization.GUID })
+        </p>
+    </div>
+
+    <div id="OrganizationsContainer" >
+        <h2 id="">Organizations</h2>
+        <ul id="OrganizationsList"  style="margin: 0px 10px 8px 40px; padding: 0px">
+            @foreach (var child in Model.Organizations)
+            {
+                <li>
+                    @Html.ActionLink(child.Name,
+                                    "Demo",
+                                    new { guid = Model.Guid, ou = child.GUID })
+                </li>
+            }
+        </ul>
+    </div>
+
+    if(Model.People.Count > 0) {
+        <div id="PeopleContainer" >
+            <h2>People</h2>
+            <ul id="PeopleList"  style="margin: 0px 10px 8px 40px; padding: 0px">
+                @foreach(var people in Model.People)
+                {
+                    <li>
+                        @Html.ActionLink(string.Format("{0}; {1}; {2}",
+                                                    people.Name, people.Title, people.Phone),
+                                         "Demo",
+                                         new { guid = Model.Guid, ou = Model.Organization.GUID, cn = people.Name })
+                    </li>
+                }
+            </ul>
+        </div>
+    }
+}

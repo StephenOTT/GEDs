@@ -1,0 +1,18 @@
+﻿@model Entities.Models.ComponentRule
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create Component Rule</h2>
+
+@Html.Partial("~/Views/Rules/_CreateRule.cshtml", Model)
+
+<div>
+    @Html.ActionLink("Back to Rules", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/FH.Geds.Rules")
+}

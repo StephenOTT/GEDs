@@ -1,0 +1,17 @@
+﻿@model Entities.Models.Component
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit: @Model.Field</h2>
+
+@Html.Partial("~/Views/Field/_EditField.cshtml", Model)
+
+<div>
+    @Html.ActionLink("Back to Field List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

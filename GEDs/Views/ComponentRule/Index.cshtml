@@ -1,0 +1,15 @@
+﻿@model IEnumerable<Entities.Models.ComponentRule>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Component Rules</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create") |
+    @Html.ActionLink("Reset Index", "Reset") |
+    @Html.ActionLink("Large Sort", "Sort")
+</p>
+
+@Html.Partial("~/Views/Rules/_IndexRule.cshtml", Model)

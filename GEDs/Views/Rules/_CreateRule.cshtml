@@ -1,0 +1,85 @@
+﻿@model Entities.Models.RuleBase
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Rule</legend>
+
+        <table>
+            <tr>
+                <th><span title="Order Index Position">*Pos</span></th>
+                <th>Name</th>
+            </tr>
+            <tr>
+                <td>@Html.DropDownList("Order", ViewBag.OrderIndex as IEnumerable<SelectListItem>, new { @class = "edit_selector" })</td>
+                <td>@Html.EditorFor(model => model.Name)</td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    @Html.ValidationMessageFor(model => model.Order)
+                     @Html.ValidationMessageFor(model => model.Name)
+                </td>
+            </tr>
+        </table>
+
+        <h3>Condition</h3>
+        <table style="width:650px; padding-left:20px; border-collapse: separate; border:1px dashed lightgrey;">
+            <tr>
+                <th><span title="Lookup column to apply condition against.">*Column</span></th>
+                <th><span title="String to apply condition against. (REGEX)">*Condition</span></th>
+            </tr>
+            <tr>
+                <td>@Html.DropDownList("LookupColumnId", ViewBag.LookupColumnList as List<SelectListItem>, new { @class = "edit_selector" })</td>
+                <td>@Html.EditorFor(model => model.RegularExpression)</td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    @Html.ValidationMessage("LookupColumnId")
+                    @Html.ValidationMessageFor(model => model.RegularExpression)
+                </td>
+            </tr>
+        </table>
+
+        <h3>Action @Html.DropDownListFor(model => model.RuleActionId, ViewBag.ActionColumnList as List<SelectListItem>, new { @class = "edit_selector" })</h3>
+
+        <table id="TableAction" style="width:650px; padding-left:20px; border-collapse: separate; border: 1px dashed lightgrey;">
+            <tr>
+                <th><span title="Action column to apply result against.">*Column</span></th>
+            </tr>
+            <tr>
+                <td>@Html.DropDownList("ActionColumnId", ViewBag.LookupColumnList as List<SelectListItem>, new { @class = "edit_selector" })</td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.ValidationMessageFor(model => model.RuleActionId)
+                    @Html.ValidationMessage("ActionColumnId")
+                </td>
+            </tr>
+            <tr>
+                <th colspan="2">
+                    <label style="float:left; padding-right: 10px;">Replace By: </label>
+                        <label for="ChoiceReplaceByValue" style="float:left;padding-right:10px;">
+                            <input type="radio" name="ReplaceByChoice" id="ChoiceReplaceByValue" style="width:10px; background-color:transparent;"/> Value
+                        </label> 
+                        <label for="ChoiceReplaceByColumn">
+                            <input type="radio" name="ReplaceByChoice" id="ChoiceReplaceByColumn" style="width:10px; background-color:transparent;" /> Column
+                        </label>
+                </th>
+            </tr>
+            <tr id="EditReplaceValue">
+                <td colspan="2">@Html.EditorFor(model => model.ReplaceValue) @Html.ValidationMessageFor(model => model.ReplaceValue)</td>
+            </tr>
+            <tr id="EditReplaceColumn">
+                <td colspan="2">@Html.DropDownListFor(model => model.ReplaceColumn, ViewBag.ReplaceColumnList as List<SelectListItem>, " -- No Column -- ", new { @class = "edit_selector" }) @Html.ValidationMessageFor(model => model.ReplaceColumn)</td>
+            </tr>
+        </table>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+

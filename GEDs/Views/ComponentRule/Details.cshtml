@@ -1,0 +1,14 @@
+﻿@model Entities.Models.ComponentRule
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details: @Model.Name</h2>
+
+@Html.Partial("~/Views/Rules/_DetailsRule.cshtml", Model)
+
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |
+    @Html.ActionLink("Back to Rules", "Index")
+</p>

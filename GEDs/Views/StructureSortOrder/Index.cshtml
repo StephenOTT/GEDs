@@ -1,0 +1,17 @@
+﻿@model IEnumerable<Entities.Models.StructureOrderPriority>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Structure Priority</h2>
+
+@if(User.IsInRole(System.Web.Configuration.WebConfigurationManager.AppSettings["AdminDomainGroup"])) {
+    <p>
+        @Html.ActionLink("Create New", "Create") |
+        @Html.ActionLink("Reset Index", "Reset") |
+        @Html.ActionLink("Large Sort", "Sort")
+    </p>
+}
+
+@Html.Partial("~/Views/Sorting/_IndexSortOrder.cshtml", Model)

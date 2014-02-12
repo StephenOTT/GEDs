@@ -1,0 +1,29 @@
+﻿@model Entities.Models.Setting
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>@Model.Name</h2>
+
+<fieldset>
+    <legend>Setting</legend>
+    
+    <div class="display-label">
+         @Html.LabelFor(model => model.Description)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Description)
+    </div>
+
+    <div class="editor-label">
+         @Html.LabelFor(model => model.Value)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Value)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |
+    @Html.ActionLink("Back to Settings", "Index")
+</p>

@@ -1,0 +1,67 @@
+﻿@model Entities.Models.Log
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Log</legend>
+
+    <div class="display-label">
+            @Html.DisplayNameFor(model => model.JobGuid)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.JobGuid)
+    </div>
+
+    <div class="display-label">
+            @Html.DisplayNameFor(model => model.Type)
+    </div>
+    <div class="display-field">
+        @Html.Label(@ViewBag.Type as string)
+    </div>
+
+    <div class="display-label">
+            @Html.DisplayNameFor(model => model.Severity)
+    </div>
+    <div class="display-field">
+        @Html.Label(@ViewBag.Severity as string)
+    </div>
+
+    <div class="display-label">
+            @Html.DisplayNameFor(model => model.Added)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Added)
+    </div>
+
+    <div class="display-label">
+            @Html.DisplayNameFor(model => model.Title)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Title)
+    </div>
+
+    <div class="display-label">
+            @Html.DisplayNameFor(model => model.Message)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Message)
+    </div>
+
+    <div class="display-label">
+            @Html.DisplayNameFor(model => model.ClassName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ClassName)
+    </div>
+
+    <div class="display-label">
+            @Html.DisplayNameFor(model => model.MethodName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.MethodName)
+    </div>
+</fieldset>

@@ -1,0 +1,39 @@
+﻿@model IEnumerable<Entities.Models.Setting>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@using GEDs.Helpers
+
+<h2>Settings</h2>
+
+<table class="selection hover overflow">
+    <tr>
+        <th style="width:30%">
+            
+        </th>
+        <th style="width:60%">
+            
+        </th>
+        <th>            
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td class="overflow_hidden">
+            @Html.ActionLink(item.Name.Elipse(30, "..."), "Details", new { id = item.Id }, new { Title = item.Name })
+        </td>
+        <td class="overflow_hidden">
+            @Html.DisplayFor(modelItem => item.Value)
+        </td>
+        <td class="align_right">
+            @if (User.IsInRole(System.Web.Configuration.WebConfigurationManager.AppSettings["AdminDomainGroup"])) {
+                @Html.ActionLink("Edit", "Edit", new { id=item.Id })            
+            }
+        </td>
+    </tr>
+}
+
+</table>

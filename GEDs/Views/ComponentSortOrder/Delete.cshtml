@@ -1,0 +1,9 @@
+﻿@model Entities.Models.ComponentOrderPriority
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete: @Model.Value</h2>
+
+@Html.Partial("~/Views/Sorting/_DeleteSortOrder.cshtml", Model)

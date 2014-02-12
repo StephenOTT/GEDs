@@ -1,0 +1,17 @@
+﻿@model Entities.Models.Component
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details: @Model.Field</h2>
+
+@Html.Partial("~/Views/Field/_DetailsField.cshtml", Model)
+
+<p>
+    @if(User.IsInRole(System.Web.Configuration.WebConfigurationManager.AppSettings["AdminDomainGroup"])) {
+        @Html.ActionLink("Edit", "Edit", new { id=Model.Id })
+        @("|")
+    }
+    @Html.ActionLink("Back to Field List", "Index")
+</p>

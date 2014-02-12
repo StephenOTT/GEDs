@@ -1,0 +1,17 @@
+﻿@model Entities.Models.Structure
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create Structure Field</h2>
+
+@Html.Partial("~/Views/Field/_CreateField.cshtml", Model)
+
+<div>
+    @Html.ActionLink("Back to Field List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

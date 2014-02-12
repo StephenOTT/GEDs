@@ -1,0 +1,13 @@
+﻿@model Entities.Models.RuleBase
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>Rule</legend>
+</fieldset>
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to Rules", "Index")
+    </p>
+}

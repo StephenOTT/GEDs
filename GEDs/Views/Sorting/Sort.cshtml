@@ -1,0 +1,94 @@
+﻿@model GEDs.ViewModel.SortingViewModel
+
+@{
+    ViewBag.Title = "Sort";
+}
+
+@section Javascript
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.sortDropdown').change(OnChangeEvent);
+        });
+
+        function OnChangeEvent() {
+            id = $(this).val();
+            itemId = $(this).attr('ItemId');
+            oldOrderIndex = parseInt($(this).attr('CurrentOrderIndex'));
+            changedRow = $('#sort-' + itemId);
+            changedRow.remove();
+
+            if (parseInt(id) > oldOrderIndex)
+                ReIndexElementsDec(id, oldOrderIndex, changedRow, $(this));
+            else ReIndexElementsInc(id, oldOrderIndex, changedRow);
+        }
+
+        function ReIndexElementsDec(newIndex, oldIndex, changedElement, changeSelect) {
+            $('.sorting').each(function (index, element) {
+                selectEntity = $($(element).children()[0]).children()[0];
+                currentOrderIndex = parseInt($(selectEntity).val());
+                if (currentOrderIndex <= newIndex && currentOrderIndex > oldIndex) {
+                    //$(element).attr("sortValue", (currentOrderIndex - 1).toString());
+                    $(selectEntity).val((currentOrderIndex - 1).toString());
+                }
+                if (currentOrderIndex == newIndex) {
+                    $(element).after($(changedElement));
+                    $(changeSelect).val(newIndex);
+                    $(changeSelect).change(OnChangeEvent);
+                    $(changeSelect).attr('CurrentOrderIndex', newIndex);
+                }
+            });
+        }
+
+        function ReIndexElementsInc(newIndex, oldIndex, changedElement, changeSelect) {
+            $('.sorting').each(function (index, element) {
+                selectEntity = $($(element).children()[0]).children()[0];
+                currentOrderIndex = parseInt($(selectEntity).val());
+                if (currentOrderIndex >= newIndex && currentOrderIndex < oldIndex) {
+                    //$(element).attr("sortValue", (currentOrderIndex + 1).toString());
+                    $(selectEntity).val((currentOrderIndex + 1).toString());
+                }
+                if (currentOrderIndex == newIndex) {
+                    $(element).before($(changedElement));
+                    $(changedElement).val(newIndex);
+                    $(changedElement).change(OnChangeEvent);
+                    $(changeSelect).attr('CurrentOrderIndex', newIndex);
+                }
+            });
+        }
+
+    </script>
+}
+
+<h2>Sort</h2>
+
+@Html.ActionLink("Back", "Index", Model.RouteActionControl)
+
+<table>
+    <tr>
+        <th><span title="Order Index Position">*Pos</span></th>
+        <th>Value</th>
+    </tr>
+    @using(Html.BeginForm(Model.RouteActionName, Model.RouteActionControl)) {
+        foreach (var item in Model.SortList) {
+            <tr class="sorting" id="sort-@item.Id.ToString()">
+                <td>
+                    @Html.DropDownList(item.Id.ToString(),
+                        new SelectList(Model.OrderIndex, "Value", "Text", item.Order.ToString()),
+                        new { @class = "sortDropdown", CurrentOrderIndex = item.Order, ItemId = item.Id }) 
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+            </tr>
+        }
+        
+        <tr>
+            <td>
+                <input type="submit" value="Save" />
+            </td>
+        </tr>
+    }
+</table>
+
+
